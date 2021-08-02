@@ -12,18 +12,19 @@
 #include "../nn_op_helper.h"
 #include "nn_operator.h"
 
-static inline int min(int a, int b) { return (a < b) ? a : b; }
-static inline int max(int a, int b) { return (a > b) ? a : b; }
+  static inline int min(int a, int b) { return (a < b) ? a : b; }
+          static inline int max(int a, int b) { return (a > b) ? a : b; }
 
 void bnn_populate_output_transform_values(output_transform_values_t* otv,
-                                          const int16_t clamp_near,
+                                                              const int16_t clamp_near,
                                           const int16_t clamp_far_0,
                                           const int16_t clamp_far_1,
 
                                           const int accu_shr,
                                           const int16_t bias_multiplier,
                                           const int16_t final_shr) {
-  int16_t shr = max(0, accu_shr);
+  int16_t shr = max(0,
+                    accu_shr);
   int32_t shl = min(accu_shr, 0);
 
   // This is implemented with a vlsat, if it's less than zero then its going to
@@ -109,19 +110,19 @@ static int clrsbll(long long x) {
 static void get_bounds_on_A(int* min_A, int* max_A, int32_t vpu_min_accu,
                             int32_t vpu_max_accu, int32_t vpu_clamp_min,
                             int32_t vpu_clamp_max) {
-  int32_t max_out =
+    int32_t max_out =
       max(max(max(vpu_min_accu, vpu_max_accu), vpu_clamp_min), vpu_clamp_max);
-  int32_t min_out =
+                                           int32_t min_out =
       min(min(min(vpu_min_accu, vpu_max_accu), vpu_clamp_min), vpu_clamp_max);
   int rsb = min(clrsb(max_out), clrsb(min_out));
 
-  *max_A = rsb - 16;
+               *max_A = rsb - 16;
   *min_A = *max_A - 16 + 1;
 }
 
 // This puts upper and lower limits on the range of Exp
 // Exp will be applied to each of the values
-// Exp must not saturate and of the values
+                      // Exp must not saturate and of the values
 // Exp must not leave all results as zero
 static void get_bounds_on_Exp(int* min_Exp, int* max_Exp, float* values,
                               unsigned values_length, int bound_width) {

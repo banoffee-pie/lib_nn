@@ -38,11 +38,9 @@ for name, url, ref in repos:
 
     if os.path.isdir(repo_dir):
         # check whether it has the correct URL
-        old_url = (
-            sp.check_output("git config --get remote.origin.url".split(), cwd=repo_dir)
-            .decode("utf-8")
-            .strip()
-        )
+        old_url = (sp.check_output(
+            "git config --get remote.origin.url".split(),
+            cwd=repo_dir).decode("utf-8").strip())
         if url == old_url:
             print("URL hasn't changed")
         else:
@@ -63,7 +61,10 @@ for name, url, ref in repos:
 
     # Fetch
     print("Fetching...")
-    sp.check_call("git fetch".split(), cwd=repo_dir, stdout=sp.PIPE, stderr=sp.PIPE)
+    sp.check_call("git fetch".split(),
+                  cwd=repo_dir,
+                  stdout=sp.PIPE,
+                  stderr=sp.PIPE)
 
     # Checkout
     print("Checking out " + ref + "...")

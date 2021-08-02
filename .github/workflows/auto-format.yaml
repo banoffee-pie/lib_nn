@@ -11,11 +11,10 @@ jobs:
         uses: actions/checkout@v2
 
       - id: format
-        uses: banoffee-pie/strawberry-sundae@main
+        uses: xmos/xaction_repo@v1.0
         with:
           file-extensions:  |
             c h cpp hpp py
-          exclude-files: "./lib_nn/src/nn_op_helper.h"
           c-style: google
           python-style: black
           token: ${{ secrets.GITHUB_TOKEN }}

@@ -2,7 +2,7 @@
 
 #include "vpu_sim.h"
 
-    using namespace nn;
+using namespace nn;
 
 // TODO: [astew] CHAR_BIT not defined if I build with Cygwin or gcc+Ubuntu+WSL.
 // Not in <limits> either.
@@ -11,7 +11,7 @@
 #endif
 
 DerefInputFn::Params::Params(const int32_t bytes_per_h_line,
-                                            const int32_t bytes_per_pixel)
+                             const int32_t bytes_per_pixel)
     : bytes_per_h_line(bytes_per_h_line), bytes_per_pixel(bytes_per_pixel) {}
 
 DerefInputFn::Params::Params(const ImageGeometry &input,

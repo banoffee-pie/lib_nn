@@ -17,5 +17,5 @@ jobs:
             c h cpp hpp py
           exclude-dirs: ""
           c-style: google
-          python-style: pep8
+          python-style: black
           token: ${{ secrets.GITHUB_TOKEN }}

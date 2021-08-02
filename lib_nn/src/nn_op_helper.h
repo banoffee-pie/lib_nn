@@ -100,7 +100,7 @@ static inline unsigned smax(const unsigned a, const unsigned b) {
   return (a >= b) ? a : b;
 }
 
-                static inline unsigned smin(const unsigned a, const unsigned b) {
+static inline unsigned smin(const unsigned a, const unsigned b) {
   return (a <= b) ? a : b;
 }
 

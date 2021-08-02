@@ -40,15 +40,11 @@ def run_traces(args, func_name):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("xe_file", help=".xe file to be traced.")
-    parser.add_argument("funcs_to_test",
-                        nargs="*",
-                        help="Functions to be tested.")
+    parser.add_argument("funcs_to_test", nargs="*", help="Functions to be tested.")
 
-    parser.add_argument("-d",
-                        "--out-dir",
-                        dest="out_dir",
-                        default=".",
-                        help="Directory to put results.")
+    parser.add_argument(
+        "-d", "--out-dir", dest="out_dir", default=".", help="Directory to put results."
+    )
     parser.add_argument(
         "-s",
         "--show-plot",

@@ -54,8 +54,7 @@ def requantize_16_to_8(measure, args):
         ("large", range(32, 10000, 48)),
     ]
 
-    cost = lambda size: 10 + (4 * (size // 16)) + 1 * (size >= 16) + 3 * (
-        size % 16 > 0)
+    cost = lambda size: 10 + (4 * (size // 16)) + 1 * (size >= 16) + 3 * (size % 16 > 0)
 
     for name, buff_sizes in things:
         print(f"\t\trequantize_16_to_8 ({name})")
@@ -73,8 +72,7 @@ def requantize_16_to_8(measure, args):
         if args.show_plot:
             plt.show()
         else:
-            plt.savefig(
-                os.path.join(args.out_dir, f"requantize_16_to_8_{name}.png"))
+            plt.savefig(os.path.join(args.out_dir, f"requantize_16_to_8_{name}.png"))
 
 
 @func_handler
@@ -123,20 +121,20 @@ def nn_conv2d_hstrip_deep(measure, args):
 
     data = zip(itertools.product(k_h, k_w, c_in, out_cols), measure(params))
 
-    data = [x + (y, ) for x, y in data]
+    data = [x + (y,) for x, y in data]
 
     data = pd.DataFrame(columns=cols, data=data, dtype=np.int32)
     data = data.astype({k: np.int32 for k in cols})
 
-    data.to_csv(os.path.join(args.out_dir, "nn_conv2d_hstrip_deep.csv"),
-                index=False)
+    data.to_csv(os.path.join(args.out_dir, "nn_conv2d_hstrip_deep.csv"), index=False)
 
-    ax = (data[(data.K_h == 1) & (data.K_w == 1) &
-               (data.C_in == 16)].set_index(["out_cols"]).cycles.plot(
-                   title="K_h = 1; K_w = 1; C_in = 16",
-                   marker="o",
-                   grid=True,
-                   legend=False))
+    ax = (
+        data[(data.K_h == 1) & (data.K_w == 1) & (data.C_in == 16)]
+        .set_index(["out_cols"])
+        .cycles.plot(
+            title="K_h = 1; K_w = 1; C_in = 16", marker="o", grid=True, legend=False
+        )
+    )
     ax.set_ylabel("cycles")
     ax.locator_params(integer=True)
 
@@ -209,23 +207,23 @@ def nn_conv2d_hstrip_deep(measure, args):
 
     data = zip(itertools.product(k_h, k_w, c_in, out_cols), measure(params))
 
-    data = [x + (y, ) for x, y in data]
+    data = [x + (y,) for x, y in data]
 
     data = pd.DataFrame(columns=cols, data=data, dtype=np.int32)
     data = data.astype({k: np.int32 for k in cols})
 
     data.to_csv(
-        os.path.join(args.out_dir,
-                     "nn_conv2d_hstrip_deep/nn_conv2d_hstrip_deep.csv"),
+        os.path.join(args.out_dir, "nn_conv2d_hstrip_deep/nn_conv2d_hstrip_deep.csv"),
         index=False,
     )
 
-    ax = (data[(data.K_h == 1) & (data.K_w == 1) &
-               (data.C_in == 16)].set_index(["out_cols"]).cycles.plot(
-                   title="K_h = 1; K_w = 1; C_in = 16",
-                   marker="o",
-                   grid=True,
-                   legend=False))
+    ax = (
+        data[(data.K_h == 1) & (data.K_w == 1) & (data.C_in == 16)]
+        .set_index(["out_cols"])
+        .cycles.plot(
+            title="K_h = 1; K_w = 1; C_in = 16", marker="o", grid=True, legend=False
+        )
+    )
     ax.set_ylabel("cycles")
     ax.locator_params(integer=True)
 
@@ -245,15 +243,17 @@ def avgpool2d(measure, args):
             for channels in range(4, 12, 4):
                 for pool_rows in range(1, 4):
                     for pool_cols in range(1, 4):
-                        params.append((
-                            out_rows,
-                            out_cols,
-                            channels,
-                            pool_rows,
-                            pool_cols,
-                            pool_rows,
-                            pool_cols,
-                        ))
+                        params.append(
+                            (
+                                out_rows,
+                                out_cols,
+                                channels,
+                                pool_rows,
+                                pool_cols,
+                                pool_rows,
+                                pool_cols,
+                            )
+                        )
 
     flattened_params = [y for x in params for y in x]
 

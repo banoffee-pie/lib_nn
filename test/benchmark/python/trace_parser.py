@@ -65,8 +65,7 @@ class XCoreOperation(object):
         raise NotImplementedError()
 
     def __str__(self):
-        return "@{}:\ttile[{}].core[{}]: FNOP".format(self.clock, self.tile,
-                                                      self.core)
+        return "@{}:\ttile[{}].core[{}]: FNOP".format(self.clock, self.tile, self.core)
 
     @staticmethod
     def read_all(file):
@@ -76,8 +75,7 @@ class XCoreOperation(object):
         while line:
             if "ECALL" in line:
                 # An exception happened in xsim
-                raise Exception(
-                    "trace file ended with an exception ({})".format(line))
+                raise Exception("trace file ended with an exception ({})".format(line))
             # Would prefer regex, but that could slow parsing down considerably.
             is_fnop = line[9] is not "-"
 
@@ -166,9 +164,9 @@ class XCoreSingleInstruction(XCoreInstruction):
         yield self.instruction
 
     def __str__(self):
-        return "@{}:\ttile[{}].core[{}]: {}".format(self.clock, self.tile,
-                                                    self.core,
-                                                    self.instruction)
+        return "@{}:\ttile[{}].core[{}]: {}".format(
+            self.clock, self.tile, self.core, self.instruction
+        )
 
 
 class XCoreBundledInstruction(XCoreInstruction):
@@ -186,8 +184,8 @@ class XCoreBundledInstruction(XCoreInstruction):
 
     def __str__(self):
         return "@{}:\ttile[{}].core[{}]: ({}, {})".format(
-            self.clock, self.tile, self.core, self.instruction[0],
-            self.instruction[1])
+            self.clock, self.tile, self.core, self.instruction[0], self.instruction[1]
+        )
 
     @staticmethod
     def are_bundled(token1, token2):

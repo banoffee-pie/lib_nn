@@ -1,0 +1,21 @@
+name: Auto-format
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  auto-format:
+    if: ${{ github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone git repo
+        uses: actions/checkout@v2
+
+      - id: format
+        uses: banoffee-pie/strawberry-sundae@main
+        with:
+          file-extensions:  |
+            c h cpp hpp py
+          exclude-dirs: ""
+          c-style: google
+          python-style: pep8
+          token: ${{ secrets.GITHUB_TOKEN }}

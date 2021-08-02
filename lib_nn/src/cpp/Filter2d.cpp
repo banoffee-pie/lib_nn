@@ -8,7 +8,7 @@ constexpr bool Filter2D::UsesPerGroupMemCopy;
 constexpr bool Filter2D_DW::UsesPerGroupMemCopy;
 
 Filter2D::Filter2D(AbstractKernel::Params *kparams, MemCpyFn *memcpy_handler,
-                   AggregateFn *aggregate_handler,
+                               AggregateFn *aggregate_handler,
                    OutputTransformFn *ot_handler, int8_t *scratch_mem)
     : AbstractKernel(kparams),
       memcpy_handler(memcpy_handler),

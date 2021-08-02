@@ -13,7 +13,7 @@ PLATFORM_FLAGS_DEFAULT := -Os                           \
 #                       -Wno-unknown-attributes
 #                       -fcmdline-buffer-bytes=1024
 PLATFORM_INCLUDES :=
-PLATFORM_EXE_SUFFIX = .xe
+			PLATFORM_EXE_SUFFIX = .xe
 
 PLATFORM_FLAGS := $(PLATFORM_FLAGS_DEFAULT)
 

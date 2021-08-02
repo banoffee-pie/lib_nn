@@ -4,7 +4,6 @@
 
 import re
 
-
 FRAME_ENTRY_INSTRUCTIONS = ["entsp", "dualentsp"]
 FRAME_EXIT_INSTRUCTIONS = ["retsp"]
 
